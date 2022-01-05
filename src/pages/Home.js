@@ -1,3 +1,4 @@
+import axios from 'axios'
 import {useState, useEffect} from 'react'
 import { Link, useSearchParams, useNavigate, createSearchParams } from 'react-router-dom'
 
@@ -20,20 +21,19 @@ function Home() {
     }
 
     useEffect(() => {
-        fetch('http://ergast.com/api/f1/seasons.json?limit=100')
-        .then(data=> data.json())
+        axios.get('http://ergast.com/api/f1/seasons.json?limit=100')
         .then(res => {
-            const reverse = res.MRData.SeasonTable.Seasons.reverse()
+            const reverse = res.data.MRData.SeasonTable.Seasons.reverse()
             setYears(reverse.map(s=> s.season))
         })
+        
     }, [])
 
     useEffect(() => {
         if (yearSelected){
-            fetch(`http://ergast.com/api/f1/${yearSelected}.json`)
-            .then(data=>data.json())
+            axios.get(`http://ergast.com/api/f1/${yearSelected}.json`)
             .then(res =>{
-            setCircuits(res.MRData.RaceTable.Races)
+            setCircuits(res.data.MRData.RaceTable.Races)
             })
         }
     }, [yearSelected])
