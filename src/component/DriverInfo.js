@@ -24,6 +24,9 @@ function DriverInfo({driver}) {
                 const imgSource = wikiData.data.query.pages[pageID].thumbnail.source
                 setProfileImage(imgSource)
             })
+            .catch(()=>{
+                setProfileImage(noProfile)
+            })
         
         
         
