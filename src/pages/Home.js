@@ -1,11 +1,12 @@
-import axios from 'axios'
-import {useState, useEffect} from 'react'
-import { Link, useSearchParams, useNavigate, createSearchParams } from 'react-router-dom'
+import {useState} from 'react'
+import { useNavigate, createSearchParams } from 'react-router-dom'
+import { useRaces } from '../hooks/useRaces'
+import { useSeasons } from '../hooks/useSeasons'
 
 function Home() {
-    const [years, setYears] = useState([])
-    const [circuits,setCircuits] = useState([])
+    const {seasons} = useSeasons()
     const [yearSelected, setYearSelected] = useState(new Date().getFullYear().toString())
+    const {circuits} = useRaces(yearSelected)
     const navigate = useNavigate()
 
     let raceSelected = ''
@@ -20,39 +21,22 @@ function Home() {
         
     }
 
-    useEffect(() => {
-        axios.get('http://ergast.com/api/f1/seasons.json?limit=100')
-        .then(res => {
-            const reverse = res.data.MRData.SeasonTable.Seasons.reverse()
-            setYears(reverse.map(s=> s.season))
-        })
-        
-    }, [])
-
-    useEffect(() => {
-        if (yearSelected){
-            axios.get(`http://ergast.com/api/f1/${yearSelected}.json`)
-            .then(res =>{
-            setCircuits(res.data.MRData.RaceTable.Races)
-            })
-        }
-    }, [yearSelected])
-
 
     return (
-        <div className='grid place-content-center bg-red-800 text-white h-screen '>
+        <div className='grid place-content-center bg-red-800 text-white h-screen w-screen overflow-auto '>
             
             <div className='justify-left space-y-3'>
                 <h1 className=' text-6xl font-bold '>F1 RACETRACKER</h1>
                 <p className=' w-96 text-left'>Replay your favorites races <strong className=' font-f1'>lap by lap!</strong>. Just select the year and the race and see the animation</p>
             </div>
 
+            {/* Race Selection Form */}
             <form className=' flex flex-col pt-5 items-center text-left  space-y-10' onSubmit={handleSubmit}>
                 <label className='flex flex-col'>
                     Select a year
                     <select className='w-32 rounded-md px-3 py-2 text-center text-black' onChange={(e)=> {setYearSelected(e.target.value)}}>
                         {
-                             years.map(year =>
+                             seasons.map(year =>
                                 <option key={year} value={year}>{year}</option>
                              )
                         }

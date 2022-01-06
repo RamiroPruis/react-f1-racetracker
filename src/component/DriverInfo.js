@@ -2,14 +2,14 @@ import { useEffect,useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import axios from 'axios'
 import noProfile from '../img/noPic.png'
-import {SCUDERIA_COLOR} from '../utils/utils'
-import { useEmiiter } from "../context/Emitter"
+import {SCUDERIA_COLOR, DEFAULT_COLOR} from '../utils/utils'
+import { useEmitter } from "../context/Emitter"
 
 function DriverInfo({driver}) {
     const [searchParams,setSearchParams] = useSearchParams()
     const [profileImage,setProfileImage] = useState('')
     const [scuderiaId,setScuderiaId] = useState('')
-    const {setDataEvent} = useEmiiter()
+    const {setDataEvent} = useEmitter()
 
 
         
@@ -20,6 +20,7 @@ function DriverInfo({driver}) {
         
         axios.get(`https://en.wikipedia.org/w/api.php?&origin=*&action=query&titles=${wikiId}&prop=pageimages&format=json&pithumbsize=100`)
             .then((wikiData)=>{
+                
                 const pageID = Object.keys(wikiData.data.query.pages)
                 const imgSource = wikiData.data.query.pages[pageID].thumbnail.source
                 setProfileImage(imgSource)
@@ -37,17 +38,17 @@ function DriverInfo({driver}) {
             .then(response=>{
                 const value = response.data.MRData.ConstructorTable.Constructors[0].constructorId
                 setScuderiaId(value)
-                setDataEvent(SCUDERIA_COLOR[value])
+                setDataEvent(SCUDERIA_COLOR[value] || DEFAULT_COLOR)
             })
     },[])
 
 
     return (
         <div className="flex transition-all hover:scale-125 hover:cursor-default items-center space-x-2 w-28">
-            <div className=" rounded-full h-10 w-10 ">
-             <img className={` rounded-full h-10 w-10 object-cover border-gray-500' border-2`} style={{borderColor: `${SCUDERIA_COLOR[scuderiaId]}`}} src={profileImage} alt=""/>
+            <div className=" hidden md:block rounded-full h-10 w-10 ">
+             <img className={` rounded-full h-10 w-10 object-cover border-gray-500' border-2`} style={{borderColor: `${SCUDERIA_COLOR[scuderiaId] || DEFAULT_COLOR}`}} src={profileImage} alt=""/>
             </div>
-            <h1 className=" text-left font-f1 font-semibold">{driver.code}</h1>
+            <h1 className=" text-left font-f1 font-semibold">{driver.code || driver.familyName}</h1>
         </div>
     )
 }

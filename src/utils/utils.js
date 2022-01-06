@@ -20,6 +20,7 @@ export const SCUDERIA_COLOR = {
     renault : '#F7D747',
     'toro-rosso': '0000FF',
     williams: '#005AFF'
-
 }
+
+export const DEFAULT_COLOR = '#474747'
 
