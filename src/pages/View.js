@@ -1,9 +1,5 @@
-
-import axios from 'axios'
 import { useState, useEffect } from "react"
-import { useSearchParams } from 'react-router-dom'
 import Sidebar from "../component/Sidebar"
-import FinishLine from "../component/FinishLine"
 import DriversGrid from "../component/DriversGrid"
 import { useRaceInfo } from '../hooks/useRaceInfo'
 
