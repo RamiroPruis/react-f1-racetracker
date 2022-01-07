@@ -12,7 +12,7 @@ export const useRaceInfo = () => {
 
     
     useEffect(()=>{
-        axios.get(`http://ergast.com/api/f1/${searchParams.get('year')}/${searchParams.get('race')}/laps.json?limit=11000`)
+        axios.get(`https://ergast.com/api/f1/${searchParams.get('year')}/${searchParams.get('race')}/laps.json?limit=11000`)
         .then(res => {
             const race = res.data.MRData.RaceTable.Races[0]
             setRace(race)
@@ -24,7 +24,7 @@ export const useRaceInfo = () => {
             setPositions(position)
         })
 
-        axios.get(`http://ergast.com/api/f1/${searchParams.get('year')}/${searchParams.get('race')}/drivers.json`)
+        axios.get(`https://ergast.com/api/f1/${searchParams.get('year')}/${searchParams.get('race')}/drivers.json`)
         .then(res=>{
             const driverInfo = res.data.MRData.DriverTable.Drivers
             setAllDriversInfo(driverInfo)

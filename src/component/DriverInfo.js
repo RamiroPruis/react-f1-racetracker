@@ -30,7 +30,7 @@ function DriverInfo({driver}) {
     },[driver.url])
 
     useEffect(()=>{
-        axios.get(`http://ergast.com/api/f1/${searchParams.get('year')}/${searchParams.get('race')}/drivers/${driver.driverId}/constructors.json`)
+        axios.get(`https://ergast.com/api/f1/${searchParams.get('year')}/${searchParams.get('race')}/drivers/${driver.driverId}/constructors.json`)
             .then(response=>{
                 const value = response.data.MRData.ConstructorTable.Constructors[0]
                 setConstructor(value)

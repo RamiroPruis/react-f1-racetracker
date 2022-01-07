@@ -8,7 +8,7 @@ export const useRaces = (yearSelected) =>{
 
     useEffect(() => {
         if (yearSelected){
-            axios.get(`http://ergast.com/api/f1/${yearSelected}.json`)
+            axios.get(`https://ergast.com/api/f1/${yearSelected}.json`)
             .then(res =>{
             setCircuits(res.data.MRData.RaceTable.Races)
             })
