@@ -35,6 +35,8 @@ function View() {
     },[actualLap,laps,positions,setPositions])
     
 
+    console.log({positions})
+
     const handleAnimation= () =>{
         let actual = 0
 
@@ -42,8 +44,6 @@ function View() {
             actual = prev + 1
             return actual})
         
-        console.log(actual)
-        console.log(laps.length)
 
         if (actual === laps.length){
 
@@ -79,7 +79,7 @@ function View() {
 
             {/* Main Animation div */}
             <DriversGrid actualLap={actualLap} allDriversInfo={allDriversInfo} race={race} positions={positions} laps={laps} drivers={drivers}/>
-            <FinishLine />
+            
     
         </div>
     )

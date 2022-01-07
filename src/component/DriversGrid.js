@@ -19,22 +19,29 @@ function DriversGrid({actualLap,allDriversInfo,race,positions,laps,drivers}) {
 
         
                 {/* All drivers */}
-                    <div className=" flex flex-col w-[100%]">
-                {   allDriversInfo.length ? (
-                    drivers.map(driver => 
-                    <div className= ' flex space-x-3 ' key={`${race.season}${race.raceName}${driver.driverId}`} >
-                        <Emitter>
+                <div className=" inline-grid grid-cols-[60vh_2.5rem]">
+                    <div className="h-fit">
+                        <div className=" flex flex-col w-[100%]">
+                    {   allDriversInfo.length ? (
+                        drivers.map(driver => 
+                        <div className= ' flex space-x-3 ' key={`${race.season}${race.raceName}${driver.driverId}`} >
+                            <Emitter>
                                 <DriverInfo className= ' flex-1  'driver={searchDriver(driver.driverId)}  />
-                            <RaceBar  className='flex-2'  position={positions[driver.driverId]} actualLap={actualLap} laps={laps.length}></RaceBar>
-                        </Emitter>
-                    </div>
+                                <RaceBar  className='flex-2'  position={positions[driver.driverId]} actualLap={actualLap} laps={laps.length}></RaceBar>
+                            </Emitter>
+                        </div>
+                        )
                     )
-                )
-                    :
-                        <div></div>
-                }
-                      
-                 </div>
+                        :
+                            <div></div>
+                    }     
+                        </div>
+                    </div>
+                    <div style={{height: `calc(2.5rem * ${drivers.length})`}}>
+                        <FinishLine />
+                    </div>
+                </div>
+                    
             </div>
     )
 }

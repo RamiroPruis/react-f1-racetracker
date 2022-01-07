@@ -2,6 +2,7 @@ import {useState} from 'react'
 import { useNavigate, createSearchParams } from 'react-router-dom'
 import { useRaces } from '../hooks/useRaces'
 import { useSeasons } from '../hooks/useSeasons'
+import Footer from '../component/Footer'
 
 function Home() {
     const {seasons} = useSeasons()
@@ -25,9 +26,9 @@ function Home() {
     return (
         <div className='grid place-content-center bg-red-800 text-white h-screen w-screen overflow-auto '>
             
-            <div className='justify-left space-y-3'>
-                <h1 className=' text-6xl font-bold '>F1 RACETRACKER</h1>
-                <p className=' w-96 text-left'>Replay your favorites races <strong className=' font-f1'>lap by lap!</strong>. Just select the year and the race and see the animation</p>
+            <div className='w-96 space-y-3'>
+                <h1 className='text-left text-6xl font-bold '>F1 RACETRACKER</h1>
+                <p className='w-fit text-justify'>Replay your favorites races <strong className=' font-f1'>lap by lap!</strong>. Just select the year and the race and see the animation <i>(for now only works for races of 1996 or above)</i>.</p>
             </div>
 
             {/* Race Selection Form */}
@@ -59,6 +60,10 @@ function Home() {
                 </button>
                 
             </form>
+
+            <div className='bg-black h-28 w-screen fixed bottom-0'>
+                <Footer />
+            </div>
         </div>
     )
 }
