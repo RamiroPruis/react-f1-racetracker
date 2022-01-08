@@ -8,7 +8,7 @@ export const useSeasons = ()=> {
         axios.get('https://ergast.com/api/f1/seasons.json?limit=100')
         .then(res => {
             const reverse = res.data.MRData.SeasonTable.Seasons.reverse()
-            setSeasons(reverse.map(s=> s.season))
+            setSeasons(reverse.map(s=> s.season).filter(s => s >= 1996))
         })
         
     }, [])

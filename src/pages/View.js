@@ -27,11 +27,12 @@ function View() {
             })
             setPositions(positions)
         }
-    
+        
+        return () =>{
+            setPositions([])
+        }
     },[actualLap,laps,positions,setPositions])
     
-
-    console.log({positions})
 
     const handleAnimation= () =>{
         let actual = 0

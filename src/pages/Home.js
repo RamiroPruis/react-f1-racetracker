@@ -15,10 +15,13 @@ function Home() {
     const handleSubmit = (e) =>{
         e.preventDefault()
         
-        navigate({
-            pathname:'/view',
-            search: `?${createSearchParams({year:yearSelected,race:raceSelected})}`
-        })
+        if (yearSelected && raceSelected)
+            navigate({
+                pathname:'/view',
+                search: `?${createSearchParams({year:yearSelected,race:raceSelected})}`
+            })
+        else
+            alert('Please, select a race')
         
     }
 
@@ -28,7 +31,7 @@ function Home() {
             
             <div className='w-96 space-y-3'>
                 <h1 className='text-left text-6xl font-bold '>F1 RACETRACKER</h1>
-                <p className='w-fit text-justify'>Replay your favorites races <strong className=' font-f1'>lap by lap!</strong>. Just select the year and the race and see the animation <i>(for now only works for races of 1996 or above)</i>.</p>
+                <p className='w-fit text-justify'>Replay your favourites races <strong className=' font-f1'>lap by lap!</strong>. Just select the year and the race and see the animation <i>(for now only works for races of 1996 or above)</i>.</p>
             </div>
 
             {/* Race Selection Form */}

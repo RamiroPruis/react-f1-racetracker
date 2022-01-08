@@ -11,6 +11,17 @@ function DriversGrid({actualLap,allDriversInfo,race,positions,laps,drivers}) {
     }
 
 
+    //set new positions to drivers collection
+    drivers = drivers.map(driver => {
+        return {...driver, position: positions[driver.driverId]}
+    })
+
+    //sort by actual position
+    drivers.sort((a,b) => {
+        return a.position - b.position
+    })
+    
+
     return (
         <div className=" grid place-items-center w-full">
 
@@ -23,11 +34,11 @@ function DriversGrid({actualLap,allDriversInfo,race,positions,laps,drivers}) {
                     <div className="h-fit">
                         <div className=" flex flex-col w-[100%]">
                     {   allDriversInfo.length ? (
-                        drivers.map(driver => 
-                        <div className= ' flex space-x-3 ' key={`${race.season}${race.raceName}${driver.driverId}`} >
+                        drivers.map(driver =>
+                        <div className= 'flex space-x-3 ' key={`${race.season}${race.raceName}${driver.driverId}`} >
                             <Emitter>
                                 <DriverInfo className= ' flex-1  'driver={searchDriver(driver.driverId)}  />
-                                <RaceBar  className='flex-2'  position={positions[driver.driverId]} actualLap={actualLap} laps={laps.length}></RaceBar>
+                                <RaceBar  className='flex-2'  position={driver.position} actualLap={actualLap} laps={laps.length}></RaceBar>
                             </Emitter>
                         </div>
                         )
