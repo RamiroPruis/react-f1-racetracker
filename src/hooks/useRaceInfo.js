@@ -36,14 +36,10 @@ export const useRaceInfo = () => {
             setAllDriversInfo(driverInfo)
         })
 
-        return () =>{
-            setRace({})
-            setDrivers([])
-            setPositions({})
-            setAllDriversInfo([])
-        }
         
     },[searchParams,navigate])
+
+
 
     return {
         race,

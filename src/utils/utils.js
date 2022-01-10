@@ -24,3 +24,17 @@ export const SCUDERIA_COLOR = {
 
 export const DEFAULT_COLOR = '#474747'
 
+
+export const getTimeDifference= (poleTime,actualTime) => {
+    const [poleMinutes,poleSeconds] = poleTime.split(':')
+    const [actualMinutes,actualSeconds] = actualTime.split(':')
+
+    
+
+    const secondsDifference = (actualMinutes - poleMinutes) * 60 + (actualSeconds - poleSeconds)
+
+    
+    return secondsDifference.toFixed(3)
+
+}
+
