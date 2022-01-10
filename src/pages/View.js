@@ -4,7 +4,6 @@ import DriversGrid from "../component/DriversGrid"
 import { useRaceInfo } from '../hooks/useRaceInfo'
 
 
-
 function View() {
     const [laps,setLaps] = useState([])
     const [actualLap,setActualLap] = useState(0)
@@ -12,27 +11,26 @@ function View() {
     const [intervalID,setIntervalID] = useState(0)
     const {race,positions,setPositions,allDriversInfo,drivers} = useRaceInfo()
 
-    useEffect(()=>{
+    useEffect(()=>{  
         if(Object.keys(race).length){
-            setLaps(race.Laps)
-        
+            const laps = race.Laps
+            setLaps(laps)
         }
     },[race])
 
     useEffect(()=>{
-        if(laps[actualLap]){
+        
+        if(laps[actualLap] && actualLap < laps.length){
             let actualPositions = positions
             laps[actualLap].Timings.forEach((lap)=>{
                 actualPositions[lap.driverId] = lap.position
             })
+
             setPositions(positions)
         }
         
-        return () =>{
-            setPositions([])
-        }
     },[actualLap,laps,positions,setPositions])
-    
+
 
     const handleAnimation= () =>{
         let actual = 0
@@ -67,7 +65,6 @@ function View() {
         setIsClicked(!isClicked)
     }
 
-    
 
     return (
         
