@@ -19,18 +19,16 @@ function View() {
     },[race])
 
     useEffect(()=>{
-        
+
         if(laps[actualLap] && actualLap < laps.length){
             let actualPositions = positions
             laps[actualLap].Timings.forEach((lap)=>{
                 actualPositions[lap.driverId] = lap.position
             })
-
             setPositions(positions)
         }
         
     },[actualLap,laps,positions,setPositions])
-
 
     const handleAnimation= () =>{
         let actual = 0

@@ -1,7 +1,6 @@
 import DriverInfo from "../component/DriverInfo"
 import RaceBar from "../component/RaceBar"
 import Emitter from "../context/Emitter"
-import { getTimeDifference } from "../utils/utils"
 import FinishLine from "./FinishLine"
 
 function DriversGrid({actualLap,allDriversInfo,race,positions,laps,drivers}) {
@@ -11,14 +10,14 @@ function DriversGrid({actualLap,allDriversInfo,race,positions,laps,drivers}) {
         return allDriversInfo.find(driver => driver.driverId === id)
     }
     
-    
-
-
-    
+        
     
     //set new positions to drivers collection
     drivers = drivers.map(driver => {
-        return {...driver, position: positions[driver.driverId]}
+        const actualPosition = positions[driver.driverId]?.pos || driver.position
+        
+
+        return {...driver, position: actualPosition}
     })
 
     //sort by actual position
@@ -58,15 +57,7 @@ function DriversGrid({actualLap,allDriversInfo,race,positions,laps,drivers}) {
                     <div style={{height: `calc(2.5rem * ${drivers.length})`}}>
                         <FinishLine />
                     </div>
-                    <div>
-                    {
-                        drivers.map(driver => 
-                            <div className=" bg-slate-800 w-fit text-white h-8 mb-2 ml-3 px-2 rounded-md" key={driver.time}>
-                                { driver===drivers[0] ? driver.time : `+${getTimeDifference(drivers[0].time,driver.time)} s`}
-                            </div>
-                        )
-                    }
-                    </div>
+                    
                 </div>
                     
             </div>

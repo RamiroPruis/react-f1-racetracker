@@ -46,7 +46,7 @@ export const useRaceInfo = () => {
         positions,
         setPositions,
         allDriversInfo,
-        drivers,
+        drivers
     }
 
 }
