@@ -10,11 +10,11 @@ function DriversGrid({actualLap,allDriversInfo,race,positions,laps,drivers}) {
         return allDriversInfo.find(driver => driver.driverId === id)
     }
     
-        
+    console.log({drivers})
     
     //set new positions to drivers collection
     drivers = drivers.map(driver => {
-        const actualPosition = positions[driver.driverId]?.pos || driver.position
+        const actualPosition = positions[driver.driverId] || driver.position
         
 
         return {...driver, position: actualPosition}
